@@ -23,7 +23,7 @@ for %%i in (%SCRIPTS%) do (
         goto loop
     ) else (
         echo Script "%%i" completed successfully.
-        timeout /T 5 >nul
+        timeout /T 5 > nul
     )
 )
 echo All scripts completed successfully.
