@@ -1,4 +1,5 @@
 @echo off
+chcp 1251 > nul
 
 REM Функция запускает набор скриптов и повторяет их выполнение при ошибке с последнего неудачного скрипта
 REM Параметры
@@ -34,7 +35,7 @@ echo Retrying script "%ERROR_SCRIPT%"...
 call %ERROR_SCRIPT%
 if errorlevel 1 (
     echo Script "%ERROR_SCRIPT%" failed again. Retrying in %RETRY_TIMEOUT% seconds...
-    timeout /T %RETRY_TIMEOUT% >nul
+    timeout /T %RETRY_TIMEOUT%
     goto :retry
 ) else (
     echo Script "%ERROR_SCRIPT%" completed successfully.

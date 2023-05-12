@@ -1,4 +1,5 @@
 @echo off
+chcp 1251 > nul
 
 REM Функция запускает набор сценариев и повторяет их выполнение при ошибке полностью с самого начала
 REM Параметры
@@ -18,7 +19,7 @@ for %%i in (%SCRIPTS%) do (
     call %%i
     if errorlevel 1 (
         echo Script "%%i" failed. Retrying in %RETRY_TIMEOUT% seconds...
-        timeout /T %RETRY_TIMEOUT% >nul
+        timeout /T %RETRY_TIMEOUT%
         goto loop
     ) else (
         echo Script "%%i" completed successfully.
