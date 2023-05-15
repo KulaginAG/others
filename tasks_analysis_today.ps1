@@ -1,5 +1,7 @@
 $path = "FOLDER"
 $today = Get-Date -Format 'yyyy-MM-dd'
+$outputFilePath = 'C:\PATH\TO\FILE.csv'
+
 Get-WinEvent -FilterHashtable @{
     'LogName' = 'Microsoft-Windows-TaskScheduler/Operational'
     'ID'      = 200, 201
@@ -14,10 +16,12 @@ Get-WinEvent -FilterHashtable @{
              Where-Object { $_.Id -eq 201 -and $_.Properties[0].Value -like "*\$path\*" } |
              Select-Object -ExpandProperty TimeCreated -First 1
 
-    New-Object -Type PSObject -Property @{
+    $taskData = [PSCustomObject]@{
         'TaskName'  = $_.Group[0].Properties[0].Value
         'StartTime' = $start
         'EndTime'   = $end
         'Duration'  = ($end - $start).TotalSeconds
     }
+
+    $taskData | Export-Csv -Path $outputFilePath -Append -NoTypeInformation
 }
