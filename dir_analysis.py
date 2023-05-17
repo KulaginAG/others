@@ -2,7 +2,7 @@ import os
 import csv
 from datetime import datetime
 
-path = r'F:\Others'
+path = r'DISK:\PATH'
 
 # Получение списка всех файлов в директории и ее поддиректориях
 files = []
@@ -27,7 +27,7 @@ for file_path in files:
 sorted_file_info = sorted(file_info, key=lambda x: x['SizeGB'], reverse=True)[:1000]
 
 # Запись результатов в CSV-файл с кодировкой Windows-1251
-with open(r'F:\Others\output2.csv', 'w', encoding='windows-1251', newline='') as csvfile:
+with open(r'DISK:\PATH\FILENAME.csv', 'w', encoding='windows-1251', newline='') as csvfile:
     fieldnames = ['FullName', 'Name', 'SizeGB', 'LastWriteTime']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames, delimiter='\t')
     writer.writeheader()
