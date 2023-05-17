@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import pandas as pd
 
 # Базовый URL-адрес веб-сайта
 base_url = "https://www.greeninfo.ru/alphabet.html/letter/"
@@ -33,3 +34,7 @@ for page_num in range(num_pages):
     print("Страница", page_num, "просмотрена.")
 
 print("Извлечение данных завершено. Сохранено в переменной l")
+
+# Конвертируем список в датафрейм и экспортируем в csv
+df = pd.DataFrame(l, columns=['name'])
+df.to_csv('botanic_dictionary.csv', index=False, sep='\t', encoding='utf-16')
