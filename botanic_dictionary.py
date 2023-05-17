@@ -22,12 +22,12 @@ for page_num in range(num_pages):
     soup = BeautifulSoup(response.content, "html.parser")
     
     # Находим все элементы с классом "em14"
-    product_elements = soup.find_all(class_="em14")
+    names = soup.find_all(class_="em14")
     
     # Извлекаем названия продуктов и записываем их в созданный список
-    for element in product_elements:
-        product_name = element.text.strip()
-        l.append(product_name)
+    for element in names:
+        name = element.text.strip()
+        l.append(name)
     
     # Отслеживаем выполнение
     print("Страница", page_num, "просмотрена.")
