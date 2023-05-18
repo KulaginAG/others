@@ -28,7 +28,8 @@ for page_num in range(num_pages):
     # Извлекаем названия продуктов и записываем их в созданный список
     for element in names:
         name = element.text.strip()
-        l.append(name)
+        if len(name) < 50: # Убираем нерелевантные значения
+            l.append(name.lower())
     
     # Отслеживаем выполнение
     print("Страница", page_num, "просмотрена.")
@@ -37,4 +38,5 @@ print("Извлечение данных завершено. Сохранено 
 
 # Конвертируем список в датафрейм и экспортируем в csv
 df = pd.DataFrame(l, columns=['name'])
+df.head()
 df.to_csv('botanic_dictionary.csv', index=False, sep='\t', encoding='utf-16')
